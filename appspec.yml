@@ -12,14 +12,14 @@ permissions:
     group: ec2-user
 hooks:
   ApplicationStart:
-    - location: cleanup.sh
-      timeout: 300
-      runas: ec2-user
     # start the application
     - location: start-service.sh
       timeout: 300
       runas: ec2-user
   ApplicationStop:
+    - location: cleanup.sh
+      timeout: 300
+      runas: ec2-user
     # stop the application
     - location: stop-service.sh
       timeout: 300
