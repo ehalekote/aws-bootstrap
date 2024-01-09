@@ -17,9 +17,6 @@ hooks:
       timeout: 300
       runas: ec2-user
   ApplicationStop:
-    - location: cleanup.sh
-      timeout: 300
-      runas: ec2-user
     # stop the application
     - location: stop-service.sh
       timeout: 300
