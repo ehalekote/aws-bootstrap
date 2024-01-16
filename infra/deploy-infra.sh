@@ -17,6 +17,8 @@ GH_REPO=$(cat ~/.github/aws-bootstrap-repo)
 GH_BRANCH=master
 
 DOMAIN=getmoodmap.com
+CERT=`aws acm list-certificates --region $REGION --profile awsbootstrap --output text \
+  --query "CertificateSummaryList[?DomainName=='$DOMAIN'].CertificateArn | [0]"`
 
 echo -e "\n\n=========== Deploying setup.yml ===========" 
 aws cloudformation deploy \
@@ -59,6 +61,7 @@ aws cloudformation deploy \
   --parameter-overrides \
     EC2InstanceType=$EC2_INSTANCE_TYPE \
     Domain=$DOMAIN \
+    Certificate=$CERT \
     GitHubOwner=$GH_OWNER \
     GitHubRepo=$GH_REPO \
     GitHubBranch=$GH_BRANCH \
